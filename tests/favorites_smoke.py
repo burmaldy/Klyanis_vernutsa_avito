@@ -68,6 +68,29 @@ with sync_playwright() as p:
     page.evaluate('window.scrollTo(0, 0)')
     page.wait_for_function("document.querySelector('.cats-grid').getBoundingClientRect().top >= 0")
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    page.evaluate("location.hash='house/me'")
+    page.wait_for_selector('.room-products .prod')
+    assert page.locator('.room-products .prod').count() == 3
+    assert page.locator('.room-photo').evaluate('(img)=>img.complete && img.naturalWidth >= 1000')
+    for item in ['sofa', 'lamp', 'table']:
+        page.locator(f'[data-item="{item}"]').click()
+        assert page.locator('[data-action="open-linked"]').get_attribute('data-link') == item
+    page.locator('[data-action="open-linked"]').click()
+    page.wait_for_selector('.listing')
+    assert page.url.endswith('#listing/table')
+    page.evaluate("location.hash='house/me'")
+    page.locator('[data-room="wish"]').click()
+    assert page.locator('.room-products .prod').count() == 4
+    page.locator('[data-item="plant"]').click()
+    page.locator('[data-action="open-linked"]').click()
+    assert page.locator('#modal').is_visible()
+    page.locator('#modalClose').click()
+    page.locator('.info-panel [data-action="fav"]').click()
+    assert page.locator('.room-products .heart[data-id="plant"]').get_attribute('aria-pressed') == 'true'
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    page.screenshot(path='/tmp/avito-realistic-house-mobile.png', full_page=True)
+    page.set_viewport_size({'width':1440,'height':1000})
+    page.screenshot(path='/tmp/avito-realistic-house.png', full_page=True)
     assert not errors, errors
     browser.close()
 server.shutdown()
