@@ -74,7 +74,10 @@ with sync_playwright() as p:
     assert page.locator('.room-photo').evaluate('(img)=>img.complete && img.naturalWidth >= 1000')
     for item in ['sofa', 'lamp', 'table']:
         page.locator(f'[data-item="{item}"]').click()
+        assert page.locator('#itemSheet').is_visible()
         assert page.locator('[data-action="open-linked"]').get_attribute('data-link') == item
+        if item != 'table':
+            page.locator('[data-action="close-sheet"]').click()
     page.locator('[data-action="open-linked"]').click()
     page.wait_for_selector('.listing')
     assert page.url.endswith('#listing/table')
@@ -85,13 +88,69 @@ with sync_playwright() as p:
     page.locator('[data-action="open-linked"]').click()
     assert page.locator('#modal').is_visible()
     page.locator('#modalClose').click()
-    page.locator('.info-panel [data-action="fav"]').click()
+    page.locator('[data-item="plant"]').click()
+    page.locator('#itemSheet [data-action="fav"]').click()
+    page.locator('[data-action="close-sheet"]').click()
     assert page.locator('.room-products .heart[data-id="plant"]').get_attribute('aria-pressed') == 'true'
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
     page.screenshot(path='/tmp/avito-realistic-house-mobile.png', full_page=True)
     page.set_viewport_size({'width':1440,'height':1000})
     page.screenshot(path='/tmp/avito-realistic-house.png', full_page=True)
+    # The list card and the sheet use the same unavailable-product guard.
+    page.locator('.room-products [data-go="listing/plant"]').first.click()
+    assert page.locator('#modal').is_visible()
+    assert page.locator('#modal h3').is_visible()
+    page.locator('#modalConfirm').click()
+    page.wait_for_selector('#app .prod')
+    assert page.url.endswith('#similar/plant')
+    assert page.locator('#app [data-go="listing/plant"]').count() == 0
+    page.evaluate("location.hash='listing/plant'")
+    page.wait_for_selector('.favorites-empty')
+    assert page.locator('#app h1').inner_text() == 'РАСКУПИЛИ'
+    page.evaluate("location.hash='house/me'")
+    page.wait_for_selector('.room-photo')
+    assert not page.locator('#itemSheet').is_visible()
+    page.locator('[data-item="sofa"]').click()
+    assert page.locator('#itemSheet').is_visible()
+    assert page.locator('#itemSheet').inner_text().find('Для отсевающих в продаже товаров будет предложена альтернатива') >= 0
+    assert page.locator('#itemSheet').bounding_box()['y'] > 0
+    page.keyboard.press('Escape')
+    assert not page.locator('#itemSheet').is_visible()
+    assert page.evaluate("!document.body.classList.contains('sheet-open')")
+    # Every community supports joining, publishing, reactions and comments.
+    for cat in ['home','car','tech','travel','pets','repair']:
+        page.evaluate('(cat)=>{location.hash="community/"+cat}', cat)
+        page.wait_for_selector('#postForm')
+        assert page.locator('.post[data-post]').count() >= 1
+        page.locator('[data-action="join"]').click()
+        assert page.locator('[data-action="join"]').get_attribute('aria-pressed') == 'true'
+        page.locator('#postTitle').fill('Проверка сообщества '+cat)
+        page.locator('#postText').fill('Поделитесь опытом выбора товаров. <script>bad()</script>')
+        page.locator('#postForm button[type="submit"]').click()
+        page.wait_for_selector('#commentForm')
+        page.locator('[data-action="post-like"]').click()
+        assert page.locator('[data-action="post-like"]').get_attribute('aria-pressed') == 'true'
+        page.locator('#commentText').fill('Полезное обсуждение — '+cat)
+        page.locator('#commentForm button').click()
+        assert page.locator('.comment').last.inner_text().endswith('Полезное обсуждение — '+cat)
+        page.reload()
+        assert page.locator('.post-title').inner_text() == 'Проверка сообщества '+cat
+        assert page.locator('.comment').last.inner_text().endswith('Полезное обсуждение — '+cat)
+        assert page.locator('[data-action="post-like"]').get_attribute('aria-pressed') == 'true'
+    page.set_viewport_size({'width':390,'height':844})
+    page.evaluate("location.hash='community/pets'")
+    page.wait_for_selector('#postForm')
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+    page.screenshot(path='/tmp/avito-community-updated.png', full_page=True)
+    page.evaluate("location.hash='house/me'")
+    page.locator('[data-item="sofa"]').click()
+    assert page.locator('#itemSheet').is_visible()
+    page.wait_for_function("Math.abs(document.querySelector('#itemSheet').getBoundingClientRect().bottom-innerHeight)<=1")
+    box=page.locator('#itemSheet').bounding_box()
+    assert abs(box['y']+box['height']-844) <= 1
+    page.screenshot(path='/tmp/avito-bottom-sheet.png')
+    page.locator('[data-action="close-sheet"]').click()
     assert not errors, errors
     browser.close()
 server.shutdown()
-print('PASS: empty state, add/remove, listing sync, reload, invalid storage, mobile layout, existing routes; no JS errors')
+print('PASS: favorites, reload, invalid storage, mobile layout, scrolling, search, house bottom sheet, unavailable products and alternatives, all six communities (join, publish, comment, react, reload); no JS errors')
