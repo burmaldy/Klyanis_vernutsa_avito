@@ -1,0 +1,50 @@
+[
+  {
+    "check": "390px, 7 screens without horizontal overflow",
+    "status": "PASS"
+  },
+  {
+    "check": "768px, 7 screens without horizontal overflow",
+    "status": "PASS"
+  },
+  {
+    "check": "1365px, 7 screens without horizontal overflow",
+    "status": "PASS"
+  },
+  {
+    "check": "1920px, 7 screens without horizontal overflow",
+    "status": "PASS"
+  },
+  {
+    "check": "V8 favorites, wish items, publications migration",
+    "status": "PASS"
+  },
+  {
+    "check": "UUID fallback, safe publication and saved comment",
+    "status": "PASS"
+  },
+  {
+    "check": "Demo purchase moves wish item to purchase scene",
+    "status": "PASS"
+  },
+  {
+    "check": "Share selected public room, owner and hashtag survive reload",
+    "status": "PASS"
+  },
+  {
+    "check": "Independent profile inventories and walls",
+    "status": "PASS"
+  },
+  {
+    "check": "Single guard charge and accessible dialog closing",
+    "status": "PASS"
+  },
+  {
+    "check": "Opt-in raid and single virtual trophy without real property changes",
+    "status": "PASS"
+  },
+  {
+    "check": "Exact placeholder; no JS errors or external network requests",
+    "status": "PASS"
+  }
+]
