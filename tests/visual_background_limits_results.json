@@ -1,0 +1,14 @@
+[
+  {
+    "check": "Oversize PNG rejected before replacement of background",
+    "status": "PASS"
+  },
+  {
+    "check": "Quota error leaves saved settings unchanged and keeps recoverable draft",
+    "status": "PASS"
+  },
+  {
+    "check": "Interior settings are separate for real/wish and persist across reload",
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "scenario": 1,
+    "status": "PASS"
+  },
+  {
+    "scenario": 2,
+    "status": "PASS"
+  },
+  {
+    "scenario": 3,
+    "status": "PASS"
+  },
+  {
+    "scenario": 4,
+    "status": "PASS"
+  },
+  {
+    "scenario": 5,
+    "status": "PASS"
+  },
+  {
+    "scenario": 6,
+    "status": "PASS"
+  },
+  {
+    "scenario": 7,
+    "status": "PASS"
+  },
+  {
+    "scenario": 8,
+    "status": "PASS"
+  },
+  {
+    "scenario": 9,
+    "status": "PASS"
+  },
+  {
+    "scenario": 10,
+    "status": "PASS"
+  },
+  {
+    "scenario": 11,
+    "status": "PASS"
+  },
+  {
+    "scenario": 12,
+    "status": "PASS"
+  }
+]

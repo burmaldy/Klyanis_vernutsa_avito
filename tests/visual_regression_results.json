@@ -1,0 +1,57 @@
+[
+  {
+    "scenario": "А",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "Б",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "В",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "Г",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "Д",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "Е",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "Ж",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "З",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "И",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "К",
+    "status": "PASS",
+    "detail": "Chromium, HTTP, real UI actions"
+  },
+  {
+    "scenario": "file://",
+    "status": "BLOCKED",
+    "detail": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///workspace/Klyanis_vernutsa_avito/Avito_Miry_v9_visual.html\nCall log:\n  - navigating to \"file:///workspace/Klyanis_vernutsa_avito/Avito_Miry_v9_visual.html\", waiting until \"load\"\n"
+  }
+]
