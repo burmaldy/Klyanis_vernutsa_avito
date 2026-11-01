@@ -1,0 +1,9 @@
+[
+  "scandi: three distinct complete floor images, valid packing",
+  "loft: three distinct complete floor images, valid packing",
+  "creative: three distinct complete floor images, valid packing",
+  "pointer, keyboard, numeric input, add/remove/reset, save and reload",
+  "crossed contour blocked; Escape discards draft",
+  "20 viewport/zone cases: editable, valid packing; profile and room keys separate",
+  "self-intersecting star rejected"
+]
