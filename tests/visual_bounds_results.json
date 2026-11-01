@@ -1,0 +1,362 @@
+[
+  {
+    "width": 390,
+    "theme": "scandi",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "scandi",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "scandi",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "scandi",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "scandi",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "loft",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "loft",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "loft",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "loft",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "loft",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "creative",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "creative",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "creative",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "creative",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 390,
+    "theme": "creative",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "scandi",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "scandi",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "scandi",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "scandi",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "scandi",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "loft",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "loft",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "loft",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "loft",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "loft",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "creative",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "creative",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "creative",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "creative",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 768,
+    "theme": "creative",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "scandi",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "scandi",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "scandi",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "scandi",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "scandi",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "loft",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "loft",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "loft",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "loft",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "loft",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "creative",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "creative",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "creative",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "creative",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 1365,
+    "theme": "creative",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "scandi",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "scandi",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "scandi",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "scandi",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "scandi",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "loft",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "loft",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "loft",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "loft",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "loft",
+    "zone": "camping",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "creative",
+    "zone": "room",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "creative",
+    "zone": "wardrobe",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "creative",
+    "zone": "shelf",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "creative",
+    "zone": "garage",
+    "status": "PASS"
+  },
+  {
+    "width": 1920,
+    "theme": "creative",
+    "zone": "camping",
+    "status": "PASS"
+  }
+]

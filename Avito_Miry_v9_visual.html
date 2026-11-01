@@ -63,6 +63,8 @@ body.sheet-open{overflow:hidden}.item-sheet{position:fixed;inset:auto 0 0;margin
 
 .visual-scene.scene-garage .scene-object{width:25%;max-width:270px;min-width:80px}.visual-scene.scene-garage .object-cartools{width:15%;max-width:145px;min-width:45px}@media(max-width:600px){.visual-scene.scene-garage .scene-object{width:25%;min-width:80px}.visual-scene.scene-garage .object-cartools{width:15%;min-width:45px}}
 
+.visual-scene .scene-object .scene-label{position:absolute;left:50%;top:calc(100% + 4px);transform:translateX(calc(-50% + var(--label-shift,0px)));width:max-content;max-width:150px;max-height:none;overflow:visible;line-height:1.3;margin:0;white-space:normal}.visual-scene .scene-object:hover .scene-label,.visual-scene .scene-object:focus-visible .scene-label,.visual-scene .scene-object.selected .scene-label{max-height:none}.visual-scene.fitting-bounds .scene-object{transition:none!important}.visual-scene .ambient-decoration{left:17%;top:60%;width:8%}@media(max-width:600px){.visual-scene .scene-label{max-width:110px}.visual-scene .ambient-decoration{left:17%;top:60%;width:9%}}
+
 </style>
 </head>
 <body>
@@ -362,6 +364,22 @@ document.addEventListener('click',handleVisualClick,true);
 document.addEventListener('change',e=>{const field=e.target.dataset.visualField;if(field&&visualDraft){e.stopImmediatePropagation();visualDraft.config=validateVisual({...visualDraft.config,[field]:field==='decor'?e.target.checked:e.target.value});updateDraftPreview()}if(e.target.id==='visualBackgroundFile'){e.stopImmediatePropagation();uploadBackgroundVisual(e.target.files[0])}if(e.target.dataset.visualPosition){e.stopImmediatePropagation();const id=e.target.dataset.visualPosition,slot=Number(e.target.value);if(!own9()||!profile9()[state.room].includes(id)||!allowedInZone(id,sceneZone)||!allowedSlotsVisual(id).includes(slot))return;profile9().positions[state.room+':'+zoneFor(id)+':'+id]=slot;save9();render()}},true);
 document.addEventListener('submit',e=>{if(e.target.id==='visualSettingsForm'){e.preventDefault();e.stopImmediatePropagation();if(!visualDraft||visualDraft.owner!==app9.viewer)return;const next={...visualSettings,[visualDraft.owner]:{...visualSettings[visualDraft.owner],[visualDraft.room]:validateVisual(visualDraft.config)}};if(persistVisual(next)){visualDraft=null;closeDialog9();render();toast('Интерьер сохранён. Все товары остались на своих местах.')}}if(e.target.id==='placeProductForm'){e.preventDefault();e.stopImmediatePropagation();const id=e.target.dataset.id,zone=String(new FormData(e.target).get('zone'));closeDialog9();addStrictVisual(id,zone)}},true);
 window.addEventListener('storage',e=>{if(e.key===VISUAL_KEY){visualSettings=loadVisual();render()}});
+
+/* Keep sprite footprints on the floor and all controls inside their scene. */
+function roomFloorEdges(x){const left=.05,corner=.53,right=.96,bottomX=.51;return {top:x<=corner?.57-(x-left)*(.27/(corner-left)):.30+(x-corner)*(.27/(right-corner)),bottom:x<=bottomX?.57+(x-left)*(.34/(bottomX-left)):.91-(x-bottomX)*(.34/(right-bottomX))}}
+function fitSceneBounds(){document.querySelectorAll('.visual-scene').forEach(scene=>{if(scene.className.includes('zoom-out-'))return;scene.classList.add('fitting-bounds');const rect=scene.getBoundingClientRect(),w=rect.width,h=rect.height;if(!w||!h)return;const pad=10;scene.querySelectorAll('.scene-object').forEach(item=>{const image=item.querySelector('.scene-cutout'),box=image.getBoundingClientRect(),zone=scene.dataset.zone;let dx=0,dy=0;const label=item.querySelector('.scene-label'),labelHeight=label?label.getBoundingClientRect().height:0;const low=zone==='room'?pad:h*.06,high=h-pad-Math.min(50,labelHeight+6);let x=(box.left+box.width/2-rect.left)/w,foot=(box.bottom-box.height*.08-rect.top)/h;
+ if(zone==='room'){const half=box.width*.28/w;let best=null;for(let test=Math.max(.12,half+.07);test<=Math.min(.89,1-half-.07);test+=.005){const a=roomFloorEdges(test-half),b=roomFloorEdges(test+half),minimum=Math.max(a.top,b.top)+.015,maximum=Math.min(a.bottom,b.bottom)-.02;if(minimum>maximum)continue;const nextY=Math.max(minimum,Math.min(maximum,foot)),cost=(test-x)**2+(nextY-foot)**2;if(!best||cost<best.cost)best={x:test,y:nextY,cost}}if(best){dx=(best.x-x)*w;dy=(best.y-foot)*h}}
+ const targetLeft=box.left-rect.left+dx,targetTop=box.top-rect.top+dy;dx+=Math.max(pad,Math.min(w-pad-box.width,targetLeft))-targetLeft;dy+=Math.max(low,Math.min(high-box.height,targetTop))-targetTop;
+ item.style.left=(parseFloat(item.style.left)+dx/w*100)+'%';item.style.top=(parseFloat(item.style.top)+dy/h*100)+'%';
+ });
+ scene.querySelectorAll('.storage-portal,.ambient-decoration').forEach(item=>{const box=item.getBoundingClientRect();let dx=Math.max(pad-box.left+rect.left,Math.min(0,rect.right-pad-box.right));let dy=Math.max(pad-box.top+rect.top,Math.min(0,rect.bottom-pad-box.bottom));if(dx)item.style.left=(item.offsetLeft+dx)+'px';if(dy)item.style.top=(item.offsetTop+dy)+'px'});
+ void scene.offsetWidth;
+ scene.querySelectorAll('.scene-label').forEach(label=>{label.style.setProperty('--label-shift','0px');const box=label.getBoundingClientRect();const shift=box.left<rect.left+pad?rect.left+pad-box.left:box.right>rect.right-pad?rect.right-pad-box.right:0;label.style.setProperty('--label-shift',shift+'px')});
+ scene.dataset.boundsReady='true';requestAnimationFrame(()=>scene.classList.remove('fitting-bounds'));
+ })}
+const renderBeforeBounds=render;render=function(){renderBeforeBounds();fitSceneBounds();requestAnimationFrame(fitSceneBounds)};
+let sceneBoundsResize;window.addEventListener('resize',()=>{cancelAnimationFrame(sceneBoundsResize);sceneBoundsResize=requestAnimationFrame(fitSceneBounds)});
+if(typeof ResizeObserver==='function'){const observer=new ResizeObserver(()=>{cancelAnimationFrame(sceneBoundsResize);sceneBoundsResize=requestAnimationFrame(fitSceneBounds)});observer.observe(document.querySelector('#app'))}
 
 render();
 </script>
