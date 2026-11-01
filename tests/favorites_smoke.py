@@ -62,6 +62,11 @@ with sync_playwright() as p:
     page.locator('.logo').click()
     assert page.locator('.cats-grid').is_visible()
     page.screenshot(path='/tmp/avito-mobile-home.png', full_page=True)
+    page.evaluate('window.scrollTo(0, document.body.scrollHeight)')
+    page.wait_for_function("document.querySelector('.cats-grid').getBoundingClientRect().bottom < 0")
+    page.screenshot(path='/tmp/avito-mobile-scrolled.png')
+    page.evaluate('window.scrollTo(0, 0)')
+    page.wait_for_function("document.querySelector('.cats-grid').getBoundingClientRect().top >= 0")
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
     assert not errors, errors
     browser.close()
